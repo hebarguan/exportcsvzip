@@ -1,7 +1,7 @@
 {
     "name": "hebarguan/exportcsv",
-    "description": "CSV export library",
-    "keywords": ["csv", "export"],
+    "description": "CSV export Zip library",
+    "keywords": ["csv", "export", "big data fragment export", "export csv zip"],
     "homepage": "https://github.com/hebarguan/exportcsv",
     "license": "MIT",
     "authors": [
