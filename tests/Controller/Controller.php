@@ -33,7 +33,7 @@ class Controller
         // 清除内存
         $result = null;
         // 如果取出的结果数量少于限制的条数，说明结果已经取完
-        if ($rowCount < $this->limit) {
+        if ($rowCount < $limit) {
             return true;
         } else {
             // 否则读取第二页并生成为一个Csv文件

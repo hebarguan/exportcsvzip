@@ -2,7 +2,7 @@
 /**
  * @author guanhuaihai@gmail.com
  * @date 2020-03-04
- * @desc 本屌写的代码超级简单自己去看吧
+ * @desc 本屌乱写的
  */
 namespace Guan\Csv;
 use ZipArchive;
@@ -40,6 +40,11 @@ class Boo
     private $ext = 'csv';
 
     /**
+     * Zip文件完整路径
+     */
+    private $zipfilePath = '';
+
+    /**
      * 初始化构造器
      * @param string $path 选择存放的路径 默认是PHP默认的上传文件临时存储目录
      * @param string $filename 导出的文件名
@@ -56,6 +61,8 @@ class Boo
         $this->filename = $filename;
         // 压缩包文件名
         $this->zipfile = $this->filename.'.zip';
+        
+        $this->zipfilePath = $this->temp.$this->zipfile;
 
         set_time_limit(0);
         // 设置内存
@@ -114,11 +121,11 @@ class Boo
     private function zip()
     {
         // 清除已存在的文件
-        if (is_file($this->temp.$this->zipfile)) {
-            @unlink($this->temp.$this->zipfile);
+        if (is_file($this->zipfilePath)) {
+            @unlink($this->zipfilePath);
         }
         $zip = new ZipArchive;
-        $zip->open($this->zipfile, ZipArchive::CREATE);
+        $zip->open($this->zipfilePath, ZipArchive::CREATE);
         foreach ($this->files as $file)
         {
             $zip->addFile($file, ltrim($file, $this->temp));
@@ -138,7 +145,7 @@ class Boo
         header('Content-Disposition: attachment;filename="'.$this->zipfile.'"');
         header('Cache-Control: max-age=0');
         ob_end_clean();
-        readfile($this->zipfile);
+        readfile($this->zipfilePath);
     }
 
     /**
@@ -152,10 +159,9 @@ class Boo
     {
         $this->zip();
         if ($filename) {
-            @rename($this->temp.$this->zipfile, $this->temp.$filename);
+            @rename($this->zipfilePath, $this->temp.$filename);
             return $this->temp.$filename;
         }
-        return $this->temp.$this->zipfile;
+        return $this->zipfilePath;
     }
 }
-
