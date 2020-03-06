@@ -9,7 +9,7 @@
 手动安装：
 
 ```
-composer require hebarguan/exportcsv
+composer require hebarguan/exportcsvzip
 ```
 
 或者
@@ -17,7 +17,7 @@ composer require hebarguan/exportcsv
 ```json
 {
     "require": {
-        "hebarguan/exportcsv": "^1.0.2"
+        "hebarguan/exportcsvzip": "^1.0"
     }
 }
 ```
